@@ -1,2 +1,1 @@
-
-            print(Y[i],x[i])
+percent

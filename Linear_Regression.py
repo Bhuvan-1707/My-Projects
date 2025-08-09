@@ -16,11 +16,12 @@ def main():
     else:
         print("cleaned")
 
-    # Split for training and testing
-    x_test = x[(len(x)*4)//5:]
-    x = x[0:(len(x)*4)//5]
-    Y_test = Y[(len(Y)*4)//5:]
-    Y = Y[0:(len(Y)*4)//5]
+    # Split for training and testing - 80/20 Train Test Split
+    split = 80
+    x_test = x[(len(x)*split)//100:]
+    x = x[0:(len(x)*split)//100]
+    Y_test = Y[(len(Y)*split)//100:]
+    Y = Y[0:(len(Y)*split)//100]
 
     # Numpy Arrays
     x = x.to_numpy()
@@ -37,7 +38,7 @@ def main():
     
     # Normalizing test
     x_test = (x_test - xmin)/(xmax - xmin)
-
+    
     # Made the X and Y vectors in the shape of n*1
     z = np.ones(x.shape)
     X = np.concatenate((x,z),1)
@@ -48,8 +49,13 @@ def main():
     z_test = np.ones(x_test.shape)
     X_test = np.concatenate((x_test,z_test),1)
 
-    # Accuracy calculation with tolerance
+    # Prediction
+    Y_Pred = X_test@w
     
+    # Accuracy Prediction with tolerance 1% Error
+    Tol = 0.5
+    accuracy = accuracy_finder(Y_Pred,Y_test,Tol)
+    print("Accuracy of ",accuracy,"/",len(Y_test),"for",Tol,"% error\n =>",(accuracy*100)/len(Y_test), "\nin split of",split,"/ 100")
 
 
 def scale(x):
@@ -82,4 +88,6 @@ def clean(x,Y):
     x = x.drop(todrop,inplace=True)
     Y = Y.drop(todrop,inplace=True)
 
+def accuracy_finder(Pred,Test,Tol):
+    return np.sum((abs(Pred-Test)/(Test))<Tol)
 main()
