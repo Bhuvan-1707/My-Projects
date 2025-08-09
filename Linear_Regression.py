@@ -27,9 +27,16 @@ def main():
     Y = Y.to_numpy()
     x = np.reshape(x,(len(x),1))
     Y = np.reshape(Y,(len(Y),1))
+    x_test.to_numpy(x_test)
+    x_test = np.reshape(x_test,(len(x_test),1))
+    Y_test.to_numpy(Y_test)
+    Y_test = np.reshape(Y_test,(len(Y_test),1))
 
     # Scaling the Train dataset
     x,xmin,xmax = scale(x)
+    
+    # Normalizing test
+    x_test = (x_test - xmin)/(xmax - xmin)
 
     # Made the X and Y vectors in the shape of n*1
     z = np.ones(x.shape)
@@ -38,14 +45,11 @@ def main():
     # Now the regression formulation
     w = np.linalg.pinv(X)@Y
 
-    # Now we have obtained weights for prediction Individual testing
-    n=5
-    print((x_test.iloc[n]-xmin)/(xmax-xmin),Y_test.iloc[n])
-    print(((x_test.iloc[n]-xmin)/(xmax-xmin))*w[0] + w[1])
+    z_test = np.ones(x_test.shape)
+    X_test = np.concatenate((x_test,z_test),1)
 
-
-
-
+    # Accuracy calculation with tolerance
+    
 
 
 def scale(x):
