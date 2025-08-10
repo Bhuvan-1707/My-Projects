@@ -4,6 +4,8 @@ import pandas as pd
 def main():
     df = pd.read_csv("/home/bhuvan1707/Desktop/Prediction-LinearReg-PseudoInv/Predicting_Salary_Based_on_Experience_using_LR_PINV/Linear_Regression_Salary_Dataset.csv")
     # Let us take Y and X variables for Linear Regression
+    # For reproducible results
+    df = df.sample(frac=1).reset_index(drop=True)
     x = df['Years of Experience']
     Y = df['Salary']
 
@@ -28,9 +30,9 @@ def main():
     Y = Y.to_numpy()
     x = np.reshape(x,(len(x),1))
     Y = np.reshape(Y,(len(Y),1))
-    x_test.to_numpy(x_test)
+    x_test = x_test.to_numpy()
     x_test = np.reshape(x_test,(len(x_test),1))
-    Y_test.to_numpy(Y_test)
+    Y_test = Y_test.to_numpy()
     Y_test = np.reshape(Y_test,(len(Y_test),1))
 
     # Scaling the Train dataset
@@ -52,11 +54,12 @@ def main():
     # Prediction
     Y_Pred = X_test@w
     
-    # Accuracy Prediction with tolerance 1% Error
+    # Accuracy Prediction with tolerance 50% Error
     Tol = 0.5
     accuracy = accuracy_finder(Y_Pred,Y_test,Tol)
     print("Accuracy of ",accuracy,"/",len(Y_test),"for",Tol,"% error\n =>",(accuracy*100)/len(Y_test), "\nin split of",split,"/ 100")
 
+    metrics(Y_test,Y_Pred)
 
 def scale(x):
     minim = np.min(x)
@@ -90,4 +93,19 @@ def clean(x,Y):
 
 def accuracy_finder(Pred,Test,Tol):
     return np.sum((abs(Pred-Test)/(Test))<Tol)
+
+def metrics(Y_test,Y_Pred):
+    mae = np.sum(abs(Y_Pred-Y_test))/len(Y_test)
+    print("MAE = ",mae)
+    mse = np.sum((Y_Pred-Y_test)**2)/len(Y_test)
+    print("MSE = ",mse)
+    rmse = np.sqrt(np.sum((Y_Pred-Y_test)**2)/len(Y_test))
+    print("RMSE = ",rmse)
+    mape = 100*np.sum(abs(Y_Pred-Y_test)/Y_test)/len(Y_test)
+    print("MAPE = ",mape)
+    ssr = np.sum((Y_Pred-Y_test)**2)
+    sst = np.sum((Y_test - np.mean(Y_test))**2)
+    rsquared = 1-(ssr/sst)
+    print("R^2 = ",rsquared)
+
 main()
