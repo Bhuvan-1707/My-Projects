@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 def main():
-    df = pd.read_csv("/home/bhuvan1707/Desktop/Prediction-LinearReg-PseudoInv/Predicting_Salary_Based_on_Experience_using_LR_PINV/Linear_Regression_Salary_Dataset.csv")
+    df = pd.read_csv("Linear_Regression_Salary_Dataset.csv")
     # Let us take Y and X variables for Linear Regression
     # For reproducible results
     df = df.sample(frac=1).reset_index(drop=True)
@@ -10,7 +10,7 @@ def main():
     Y = df['Salary']
 
     # Check missing value => No missing values
-    To_Estimate=[] 
+    To_Estimate=[]
     while(check(Y)==False or False==check(x)):
         locate(x,Y)
         clean(x,Y)
@@ -108,4 +108,5 @@ def metrics(Y_test,Y_Pred):
     rsquared = 1-(ssr/sst)
     print("R^2 = ",rsquared)
 
+# def plot()
 main()
