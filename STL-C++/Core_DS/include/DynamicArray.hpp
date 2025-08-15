@@ -32,5 +32,5 @@ class DynamicArray{
         int getCapacity();
         bool isEmpty();
 };
-
+#include "../src/DynamicArray.tpp"
 #endif
