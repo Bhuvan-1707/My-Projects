@@ -131,3 +131,32 @@ template <class T>
 bool DynamicArray<T>::isEmpty(){
     return size==0;
 }
+
+template <class T>
+void DynamicArray<T>::show(){
+    for(size_t i=0;i<size;i++){
+        std::cout<<data[i]<<" ";
+    }
+    std::cout<<std::endl;
+}
+
+template <class T>
+void DynamicArray<T>::shrinkToFit(){
+    resize(size);
+}
+
+template <class T>
+T& DynamicArray<T>::front(){
+    if (isEmpty()) {
+        throw std::out_of_range("DynamicArray is empty: no last element");
+    }
+    return *(data+0);
+}
+
+template <class T>
+T& DynamicArray<T>::back(){
+    if (isEmpty()) {
+        throw std::out_of_range("DynamicArray is empty: no last element");
+    }
+    return *(data+size-1);
+}

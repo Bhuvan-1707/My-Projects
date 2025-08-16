@@ -50,5 +50,16 @@ int main() {
         std::cout << arr3[i] << " ";
     std::cout << "\n";
 
+    // Show method testing
+    std::cout << "Show Method test: ";
+    arr3.show();
+
+    // Shrinktofit method testing
+    std::cout << "Shrink To Fit Method test: ";
+    arr3.shrinkToFit();
+    std::cout<<arr3.getSize()<<" "<<arr3.getCapacity()<<std::endl;
+
+    // Front and back testing method
+    std::cout<<"Front: "<<arr3.front()<<" "<<"Back: "<<arr3.back()<<std::endl;
     return 0;
 }

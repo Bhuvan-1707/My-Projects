@@ -26,11 +26,16 @@ class DynamicArray{
         bool removeEnd();
         bool insert(size_t index, T value);
         bool remove(size_t index);
-        
-        T& operator[](size_t index);
-        int getSize();
-        int getCapacity();
-        bool isEmpty();
+        void show();
+        T& front();
+        T& back();
+
+        // Capacity and properties
+        T& operator[](size_t index); // Index accessing operator "[]"
+        int getSize(); // Get Size of the DynamicArray
+        int getCapacity(); // Get the Max Capacity of the Dynamic Array
+        bool isEmpty(); // Whether the DA is empty or not
+        void shrinkToFit(); // Whenever u need no more insertions,... use this - but still insertions will work
 };
 #include "../src/DynamicArray.tpp"
 #endif
