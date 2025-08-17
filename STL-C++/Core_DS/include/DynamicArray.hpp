@@ -29,6 +29,8 @@ class DynamicArray{
         void show();
         T& front();
         T& back();
+        T& at(size_t index);
+        bool find(T element,size_t& index);
 
         // Capacity and properties
         T& operator[](size_t index); // Index accessing operator "[]"
@@ -37,5 +39,7 @@ class DynamicArray{
         bool isEmpty(); // Whether the DA is empty or not
         void shrinkToFit(); // Whenever u need no more insertions,... use this - but still insertions will work
 };
+
 #include "../src/DynamicArray.tpp"
+
 #endif

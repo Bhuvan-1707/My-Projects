@@ -160,3 +160,20 @@ T& DynamicArray<T>::back(){
     }
     return *(data+size-1);
 }
+
+template <class T>
+T& DynamicArray<T>::at(size_t index){
+    if(index>=size){throw std::out_of_range("Index out of bounds in DynamicArray");}
+    return data[index];
+}
+
+template <class T>
+bool DynamicArray<T>::find(T element,size_t& index){
+    for(int i=0;i<size;i++){
+        if(element == data[i]){
+            index= i;
+            return true;
+        }
+    }
+    return false;
+}

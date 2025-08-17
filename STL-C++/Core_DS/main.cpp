@@ -61,5 +61,15 @@ int main() {
 
     // Front and back testing method
     std::cout<<"Front: "<<arr3.front()<<" "<<"Back: "<<arr3.back()<<std::endl;
+
+    // at and find method testing
+    std::cout<<"At 5 is : "<<arr3.at(5)<<std::endl;
+    size_t index;
+    arr3.find(2,index);
+    std::cout<<"Find 2 is : "<<index<<std::endl;
+
+    //
+
+
     return 0;
 }
