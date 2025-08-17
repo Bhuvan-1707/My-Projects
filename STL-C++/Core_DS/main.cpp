@@ -68,8 +68,13 @@ int main() {
     arr3.find(2,index);
     std::cout<<"Find 2 is : "<<index<<std::endl;
 
-    //
-
-
+    // Clear method testing
+    arr2.clear();
+    arr2.addEnd(5);
+    arr2.addEnd(2);
+    arr2.addEnd(3);
+    arr2.addEnd(5);
+    arr2.show();
+    std::cout<<"Count of 5 in arr2 : "<<arr2.count(5)<<std::endl;
     return 0;
 }

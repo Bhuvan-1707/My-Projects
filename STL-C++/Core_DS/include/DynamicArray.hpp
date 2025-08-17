@@ -31,6 +31,7 @@ class DynamicArray{
         T& back();
         T& at(size_t index);
         bool find(T element,size_t& index);
+        int count(T element);
 
         // Capacity and properties
         T& operator[](size_t index); // Index accessing operator "[]"
@@ -38,6 +39,8 @@ class DynamicArray{
         int getCapacity(); // Get the Max Capacity of the Dynamic Array
         bool isEmpty(); // Whether the DA is empty or not
         void shrinkToFit(); // Whenever u need no more insertions,... use this - but still insertions will work
+        void clear(); // Clear the array with keeping the capacity same
+
 };
 
 #include "../src/DynamicArray.tpp"

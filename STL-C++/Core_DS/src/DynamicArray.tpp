@@ -177,3 +177,20 @@ bool DynamicArray<T>::find(T element,size_t& index){
     }
     return false;
 }
+
+template <class T>
+void DynamicArray<T>::clear(){
+    size = 0;
+}
+
+template <class T>
+int DynamicArray<T>::count(T element){
+    int count=0;
+    for(size_t i=0;i<size;i++){
+        if(data[i]==element){
+            count++;
+        }
+    }
+    return count;
+}
+
