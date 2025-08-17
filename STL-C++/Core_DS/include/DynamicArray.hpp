@@ -32,6 +32,7 @@ class DynamicArray{
         T& at(size_t index);
         bool find(T element,size_t& index);
         int count(T element);
+        bool contains(T element);
 
         // Capacity and properties
         T& operator[](size_t index); // Index accessing operator "[]"

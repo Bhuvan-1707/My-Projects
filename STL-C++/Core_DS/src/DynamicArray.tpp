@@ -194,3 +194,10 @@ int DynamicArray<T>::count(T element){
     return count;
 }
 
+template <class T>
+bool DynamicArray<T>::contains(T element){
+    if(count(element)<=0){
+        return false;
+    }
+    return true;
+}

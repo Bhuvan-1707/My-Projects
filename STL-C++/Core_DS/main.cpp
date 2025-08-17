@@ -76,5 +76,6 @@ int main() {
     arr2.addEnd(5);
     arr2.show();
     std::cout<<"Count of 5 in arr2 : "<<arr2.count(5)<<std::endl;
+    std::cout<<"Is 3 there in arr2 : "<<arr2.contains(3)<<std::endl;
     return 0;
 }
