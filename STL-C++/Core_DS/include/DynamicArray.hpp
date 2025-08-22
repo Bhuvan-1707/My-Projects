@@ -33,6 +33,7 @@ class DynamicArray{
         bool find(T element,size_t& index);
         int count(T element);
         bool contains(T element);
+        void sortbubble();
 
         // Capacity and properties
         T& operator[](size_t index); // Index accessing operator "[]"

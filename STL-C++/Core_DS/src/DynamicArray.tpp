@@ -201,3 +201,21 @@ bool DynamicArray<T>::contains(T element){
     }
     return true;
 }
+
+template <class T>
+void DynamicArray<T>::sortbubble(){
+    int* curr;
+    int* next;
+    int temp;
+    for(int i=0;i<size-1;i++){
+        for(int j=0;j<size-i-1;j++){
+            curr = &data[j];
+            next = &data[j+1];
+            if(*curr>*next){
+                temp = *next;
+                *next = *curr;
+                *curr = temp;
+            }
+        }
+    }
+}
