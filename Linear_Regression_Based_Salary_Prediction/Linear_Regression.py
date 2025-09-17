@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def main():
     df = pd.read_csv("Linear_Regression_Salary_Dataset.csv")
@@ -61,6 +62,29 @@ def main():
 
     metrics(Y_test,Y_Pred)
 
+    # Plotting Testing
+    Y_Plt_test = Y_test[:len(Y_test)//20]
+    Y_Plt_Pred = Y_Pred[:len(Y_Pred)//20]
+    xrange = np.arange(0,len(Y_Plt_test),1)
+    plt.plot(xrange,Y_Plt_test)
+    plt.plot(xrange,Y_Plt_Pred)
+    plt.legend(["Actual Salary","Predicted Salary"])
+    plt.xlabel("Instance")
+    plt.ylabel("Salary")
+    plt.savefig("Prediction Plot.png",dpi=300)
+
+    plt.clf()
+    Y_Plt_test = Y_test[:len(Y_test)]
+    Y_Plt_Pred = Y_Pred[:len(Y_Pred)]
+    xrange = np.arange(min(Y_Plt_test),max(Y_Plt_test),1)
+    plt.scatter(Y_Plt_test,Y_Plt_Pred)
+    plt.plot(xrange,xrange,linestyle=":")
+    plt.legend(["Actual vs Predicted","Linear Predictor"])
+    plt.xlabel("Actual Values")
+    plt.xlabel("Predicted Values")
+    plt.savefig("Scatter Plot.png",dpi=300)
+
+
 def scale(x):
     minim = np.min(x)
     maxim = np.max(x)
@@ -93,6 +117,7 @@ def clean(x,Y):
 
 def accuracy_finder(Pred,Test,Tol):
     return np.sum((abs(Pred-Test)/(Test))<Tol)
+
 
 def metrics(Y_test,Y_Pred):
     mae = np.sum(abs(Y_Pred-Y_test))/len(Y_test)
