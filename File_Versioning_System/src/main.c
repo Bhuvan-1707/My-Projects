@@ -3,6 +3,8 @@
 #include<stdlib.h>
 #include<string.h>
 #include<sys/stat.h>
+#include<unistd.h>
+
 
 // Struct Metadata of a file for containing all the commit information
 struct Metadata{
@@ -19,14 +21,17 @@ void create_metadata(char* filename, struct Metadata metadata){
     strcpy(metadata.filename,filename);
     // Copy the relative file path from the present working directory
     char cwd[1024];
-    if(getcwd(cwd,sizeof(cwd))!=NULL){
-        // TODO
+        if (getcwd(cwd, sizeof(cwd)) != NULL) {
+        printf("Current directory: %s\n", cwd);
+    } else {
+        perror("getcwd error");
     }
+
     // Copy the time taken from time() converted to string by ctime()
     strcpy(metadata.date,ctime(&(time_t){time(NULL)}));
-    // Take the time(), make it into localtime(), use metadata.version_id as buffer to convert the localtime into timestamp - version id
-    strftime(metadata.version_id,sizeof(metadata.version_id),"%Y%m%d_%H%M%S",localtime(&(time_t){time(NULL)}));
-    // Size finder and adds it into metadata
+    // time() into localtime(), convert the localtime into timestamp - version id
+    strftime(metadata.version_id,sizeof(metadata.version_id),
+    "%Y%m%d_%H%M%S",localtime(&(time_t){time(NULL)}));
 }
 
 // Log writer function
