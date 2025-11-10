@@ -4,6 +4,7 @@
 
 template <class T>
 DynamicArray<T>::DynamicArray(){
+    // Default Constructor
     size=0;
     capacity=64;
     data = new T[capacity];
@@ -11,6 +12,7 @@ DynamicArray<T>::DynamicArray(){
 
 template <class T>
 DynamicArray<T>::DynamicArray(size_t c){
+    // Capacity based Constructor
     size=0;
     capacity=c;
     data = new T[capacity];
@@ -18,6 +20,7 @@ DynamicArray<T>::DynamicArray(size_t c){
 
 template <class T>
 DynamicArray<T>::~DynamicArray(){
+    // Destructor
     delete[] data;
 };
 

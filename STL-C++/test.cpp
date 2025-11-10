@@ -17,7 +17,6 @@ int main(){
                 temp = *next;
                 *next = *curr;
                 *curr = temp;
-
             }
         }
     }

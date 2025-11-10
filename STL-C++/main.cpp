@@ -1,5 +1,5 @@
 #include <iostream>
-#include "include/DynamicArray.hpp"
+#include "Core_DS/include/DynamicArray.hpp"
 
 int main() {
     DynamicArray<int> arr;
