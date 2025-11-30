@@ -206,6 +206,13 @@ bool DynamicArray<T>::contains(T element){
 }
 
 template <class T>
+void DynamicArray<T>::reserve(size_t new_capacity){
+    if(this->capacity < new_capacity){
+        resize(new_capacity);
+    }
+}
+
+template <class T>
 void DynamicArray<T>::sortbubble(){
     int* curr;
     int* next;
@@ -221,4 +228,37 @@ void DynamicArray<T>::sortbubble(){
             }
         }
     }
+}
+
+template <class T>
+DynamicArray<T>& DynamicArray<T>::operator=(DynamicArray&& other) noexcept{
+        // 1. Self-assignment check
+    if (this == &other)
+        return *this;
+    
+    delete[] data;
+    
+    this->data = other.data;
+    this->size = other.size;
+    this->capacity = other.capacity;
+
+    other.size = 0;
+    other.data = nullptr;
+    other.capacity = 0;
+
+    return *this;
+}
+
+template <class T>
+DynamicArray<T>::DynamicArray(DynamicArray&& other) noexcept {
+
+    // 1. Steal the data pointer and metadata
+    data = other.data;
+    size = other.size;
+    capacity = other.capacity;
+
+    // 2. Leave 'other' in a valid empty state
+    other.data = nullptr;
+    other.size = 0;
+    other.capacity = 0;
 }

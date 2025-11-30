@@ -85,5 +85,77 @@ int main() {
     std::cout<<"Array 3 after bubble sort : ";
     arr3.show();
 
+    std::cout << "=== Testing Move Constructor ===\n";
+
+    DynamicArray<int> a(5);
+    a.addEnd(10);
+    a.addEnd(20);
+    a.addEnd(30);
+
+    std::cout << "Original a: ";
+    a.show();
+
+    // Use move constructor
+    DynamicArray<int> b = std::move(a);
+
+    std::cout << "After moving, b: ";
+    b.show();
+
+    std::cout << "After moving, a (should be empty): ";
+    a.show();
+
+
+    std::cout << "\n=== Testing Move Assignment ===\n";
+
+    DynamicArray<int> c(5);
+    c.addEnd(100);
+    c.addEnd(200);
+
+    DynamicArray<int> d(5);
+    d.addEnd(1);
+    d.addEnd(2);
+    d.addEnd(3);
+
+    std::cout << "Before move assignment, c: ";
+    c.show();
+
+    std::cout << "Before move assignment, d: ";
+    d.show();
+
+    // Move assignment
+    c = std::move(d);
+
+    std::cout << "After c = std::move(d), c: ";
+    c.show();
+
+    std::cout << "After move, d (should be empty): ";
+    d.show();
+
+    std::cout << "=== Testing reserve() ===\n";
+
+    DynamicArray<int> resarr(5);
+    resarr.addEnd(10);
+    resarr.addEnd(20);
+    resarr.addEnd(30);
+
+    std::cout << "Before reserve:\n";
+    std::cout << "Size: " << resarr.getSize() << "\n";
+    std::cout << "Capacity: " << resarr.getCapacity() << "\n";
+    resarr.show();
+
+    // Test 1: Increase capacity
+    resarr.reserve(20);
+    std::cout << "\nAfter reserve(20):\n";
+    std::cout << "Size: " << resarr.getSize() << " (should stay 3)\n";
+    std::cout << "Capacity: " << resarr.getCapacity() << " (should become 20)\n";
+    resarr.show();  // should still print 10 20 30
+
+    // Test 2: Reserve smaller than current capacity (should do nothing)
+    resarr.reserve(10);
+    std::cout << "\nAfter reserve(10) [should not change]:\n";
+    std::cout << "Size: " << resarr.getSize() << "\n";
+    std::cout << "Capacity: " << resarr.getCapacity() << " (should still be 20)\n";
+    resarr.show();  // still 10 20 30
+
     return 0;
 }

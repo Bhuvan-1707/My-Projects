@@ -20,20 +20,25 @@ class DynamicArray{
         DynamicArray(const DynamicArray& other);            
         // Copy Assignment constructor
         DynamicArray& operator=(const DynamicArray& other);
+        // Move constructor
+        DynamicArray(DynamicArray&& other) noexcept;
+        // Move Assignment Operator
+        DynamicArray& operator=(DynamicArray&& other) noexcept;
 
 
-        void addEnd(T value);
-        bool removeEnd();
-        bool insert(size_t index, T value);
-        bool remove(size_t index);
-        void show();
-        T& front();
-        T& back();
-        T& at(size_t index);
-        bool find(T element,size_t& index);
-        int count(T element);
-        bool contains(T element);
-        void sortbubble();
+        void addEnd(T value); // Add an element at the end
+        bool removeEnd(); // Remove an element at the end
+        bool insert(size_t index, T value); // Insert an element at the index
+        bool remove(size_t index); // Remove an element from the index
+        void show(); // Show the dynamic array
+        T& front(); // Return the first element
+        T& back(); // Return the last element
+        T& at(size_t index); // Return the element at the index
+        bool find(T element,size_t& index); // Find the element and return the index using args
+        int count(T element); // Count of the elements
+        bool contains(T element); // If element present return true else false
+        void reserve(size_t new_capacity);
+        void sortbubble(); // Bubble sort of the DA
 
         // Capacity and properties
         T& operator[](size_t index); // Index accessing operator "[]"
