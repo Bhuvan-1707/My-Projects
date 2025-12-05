@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssstyle.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convolution</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+        function addbox(div,vec,namegiven){
+            const newelem = document.createElement('input');
+            newelem.setAttribute('type','text');
+            newelem.setAttribute('maxlength','1');
+            newelem.setAttribute('size','1');
+            newelem.setAttribute('name',namegiven);
+            newelem.addEventListener('input', () => shiftfocus(newelem));
+            newelem.setAttribute('onkeydown', 'handleEnterKey(event)');
+            newelem.setAttribute('required', ''); 
+            div.insertBefore(newelem,vec);
+        }
+        function shiftfocus(box) {
+            box.nextElementSibling.focus();
+        };
+        function handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                shiftfocus(event.target);
+            }
+        }
+        function randomgen(div) {
+            const inputElements = div.querySelectorAll("input[type='text']");
+            inputElements.forEach((item) => {
+                item.value = generate_a_rand(-4, 4);
+            });
+        }
+
+        function generate_a_rand(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        function resetdivs(A,B){
+            const inputElementsA = A.querySelectorAll("input[type='text']");
+            const inputElementsB = B.querySelectorAll("input[type='text']");
+            inputElementsA.forEach((item) => {
+                item.value = '';
+            });
+            inputElementsB.forEach((item) => {
+                item.value = '';
+            });
+
+        }
+        function captureDivAsJPEG(divId, filename="capture.jpeg") {
+            let target = document.getElementById(divId);
+
+            html2canvas(target).then(canvas => {
+                const jpeg = canvas.toDataURL("image/jpeg", 0.9);
+
+                let link = document.createElement("a");
+                link.href = jpeg;
+                link.download = filename;
+                link.click();
+            });
+        }
+    </script>
+    <form method="POST" action="{{url_for('homepage')}}">
+        <center>
+        <div>
+            <div id="div1">
+                <label>Enter Vector 1: </label>
+                {% if results %}
+                    {% for val in results.vector1 %}
+                    <input type="text" maxlength="1" size="1" name="vector1data" value = "{{ val }}" oninput="shiftfocus(this)" onkeydown="handleEnterKey(event)">
+                    {% endfor %}
+                {% endif %}
+                <button type="button" id="vec1add" onclick="addbox(div1,this,'vector1data')">Add</button>
+                <button type="button" id="random1" onclick="randomgen(div1)">Random</button>
+            </div>
+            <div id="div2">
+                <label>Enter Vector 2: </label>
+                {% if results %}
+                    {% for val in results.vector2 %}
+                    <input type="text" maxlength="1" size="1" name="vector2data" value = "{{ val }}" oninput="shiftfocus(this)" onkeydown="handleEnterKey(event)">
+                    {% endfor %}
+                {% endif %}
+                <button type="button" id="vec2add" onclick="addbox(div2,this,'vector2data')">Add</button>
+                <button type="button" id="random2" onclick="randomgen(div2)">Random</button>
+            </div>
+            <button type="submit" name="action" value="L">LConv</button>
+            <button type="submit" name="action" value="C">CConv</button>
+            <button type="submit" name="action" value="Plot">Plot</button>
+            <button type="button" name="action" value="reset" onclick="resetdivs(div1,div2)">Reset</button>
+            <br>
+            <p style="border-left: none; border-radius: none; background-color: white;"align="right">
+                <a href="{{url_for('main')}}">
+                    <button type="button" name="Close" class="align-right">Close</button>
+                </a>
+            </p>
+        </div>
+        </center>
+        
+        <div id=captureArea>
+        {% if results %}
+            <hr>
+            <h2>Results:</h2>
+            <p>Vector 1 Data: {{ results.vector1 }}</p>
+            <p>Vector 2 Data: {{ results.vector2 }}</p>
+                
+            {% if results.L %}
+                <p>Linear Convolution Data: {{ results.L  }}</p>
+            {% endif %}
+                
+            {% if results.C %}
+                <p>Circular Convolution Data: {{ results.C  }}</p>
+            {% endif %}
+
+            {% if results.Plot %}
+                <img src="../static/images/plot.png">
+            {% endif %}
+        {% endif %}
+        </div>
+        <center>
+        <button type="button" id="downloadBtn" onclick="captureDivAsJPEG('captureArea', 'result.jpeg')">
+            Download Results
+        </button>
+        </center>
+    </form>
+</body>
+</html>

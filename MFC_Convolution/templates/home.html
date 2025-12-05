@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssstyle.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MFC-Assignment</title>
+</head>
+<body>
+    <center>
+        <img src="{{ url_for('static', filename='images/AmritaLogo.png') }}" alt="Amrita Logo">
+        </center>
+    <h1>MFC-4 Assignment</h1>
+    <form>
+        Submitted By,
+        <center>
+            <p style="padding:5px; border-left: none; border-radius: none; background-color: white;">Bhuvan Rajasekar - CB.SC.U4AIE24209</p>
+            <p style="padding:5px; border-left: none; border-radius: none; background-color: white;">AIE-C</p>
+            <p style="padding:5px; border-left: none; border-radius: none; background-color: white;"">Website for Demonstrating Linear and Circular Convolution</p>
+            <a href="{{url_for('homepage')}}">
+                    <button type="button" name="Enter">Enter</button>
+            </a>
+        </center>
+    </form>
+</body>
+</html>
