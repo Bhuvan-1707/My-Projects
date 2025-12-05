@@ -23,8 +23,8 @@ def homepage():
             results = circularconvolute(get_vectors(vectorlist1,vectorlist2))
             session['last_results'] = results
         if actionvariable == 'Plot':
-            results = session.get('last_results', None)
-            results = plotting_result(results)
+            res = session.get('last_results', None)
+            results = plotting_result(res)
             session['last_results'] = results
     return render_template('index.html',results=results)
 
