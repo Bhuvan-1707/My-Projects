@@ -101,5 +101,4 @@ def plotting_result(results):
     plt.savefig('static/images/plot.png')
     return results
 
-if __name__ ==  '__main__':
-    app.run(debug=True)
+app=app
