@@ -1,3 +1,9 @@
+ ## Assignment Report
+ ![Amrita Logo](static/images/AmritaLogo.png)\
+ Bhuvan Rajasekar - CB.SC.U4AIE24209\
+ AIE-C\
+ Mathematics for Computing - 4 (22MAT230)
+ 
  ## MFC_Convolution
  
  A small Flask web application that performs **linear** and **circular convolution** on two integer vectors, displays the results, and lets the user download the results (and optionally plots) from the browser.
