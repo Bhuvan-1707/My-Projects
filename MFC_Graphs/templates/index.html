@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    function showtab(evt,tabname){
+        var i,tabcontent,tablinks;
+
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        document.getElementById(tabname).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+</script>
+
+<!-- Rendering Matrix using Jinja-->
+
+{% macro matrix_table(matrix) %}
+<table border="1" cellpadding="4" cellspacing="0">
+  {% for row in matrix %}
+  <tr>
+    {% for val in row %}
+    <td>{{ val }}</td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+{% endmacro %}
+
+<body>
+    <form method="post" action="/">
+        <center>
+            <h2>Graph Visualization</h2>
+            <div class="tabs">
+                <button class="tablinks" type="button" onclick="showtab(event,'randomtab')">Random</button>
+                <button class="tablinks" type="button" onclick="showtab(event,'manualtab')">Manual</button>
+            </div>
+
+            <div id="randomtab"class="tabcontent" style="display:block">
+                <label>Enter no.of Nodes: </label><input type="number" name="numnodes"><br>
+                <label>Enter no.of Edges: </label><input type="number" name="numedges"><br>
+                <button type="submit" name="submission" value="random-submit">Submit</button>
+            </div>
+
+            <div id="manualtab"class="tabcontent">
+                <label>Enter Outgoing Node list</label><input type="text" placeholder="Separate by spaces" name="outgoing-input"><br>
+                <label>Enter Incoming Node list</label><input type="text" placeholder="Separate by spaces" name="incoming-input"><br>
+                <button type="submit" name="mansub" value="manual-submit">Submit</button>
+            </div>
+
+            {% if error %}
+                <p style="color:red;">{{ error }}</p>
+            {% endif %}
+
+            <hr>
+            <div class="container">
+                <div id="i1" class="matrix-wrapper">
+                    <h4>Graph</h4>
+                    <div class="graph-wrapper">
+                        <svg id="graph-canvas" width="600" height="400"></svg>
+                    </div>
+                </div>
+                <div class="matrix-wrapper">
+                    <h4>Incidence Matrix</h4>
+                    {% if results %}
+                    {{ matrix_table(results.IM) }}
+                    {% endif %}
+                </div>
+                <div class="matrix-wrapper">
+                    <h4>Adjacency Matrix</h4>
+                    {% if results %}
+                    {{ matrix_table(results.AM) }}
+                    {% endif %}
+                </div>
+                <div class="matrix-wrapper">
+                    <h4>Degree Matrix</h4>
+                    {% if results %}
+                    {{ matrix_table(results.DM) }}
+                    {% endif %}
+                </div>
+                <div class="matrix-wrapper">
+                    <h4>Laplacian Matrix</h4>
+                    {% if results %}
+                    {{ matrix_table(results.LM) }}
+                    {% endif %}
+                </div>
+            </div>
+        </center>
+        {% if results %}
+        <script>
+            const adjmat = {{ results.AM | tojson }};
+            console.log("Adjacency Matrix:", adjmat);
+        </script>
+        {% endif %}
+    </form>
+</body>
+
+<script src="{{ url_for('static', filename='graph.js') }}">
+</script>
+
+</html>

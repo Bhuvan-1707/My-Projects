@@ -1,0 +1,186 @@
+.tabcontent {
+  display: none;
+}
+body {
+    background: #f2f7ff;
+}
+
+form {
+    background: white;
+    width: 800px;
+    margin: 40px auto;
+    padding: 25px 40px;
+    border-radius: 15px;
+    box-shadow: 20px 20px 40px rgba(0,0,0,1);
+}
+
+label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f365a;
+}
+
+input[type="text"] {
+    border: 2px solid #1be7a3;
+    border-radius: 6px;
+    padding: 6px;
+    margin-left: 16px;
+    margin-right: 2px;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+    transition: 0.5s;
+}
+
+input[type="number"] {
+    border: 2px solid #1be7a3;
+    border-radius: 6px;
+    padding: 6px;
+    margin-left: 16px;
+    margin-right: 2px;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+    transition: 0.5s;
+}
+
+input[type="text"]:focus {
+    border-color: #752de9;
+    box-shadow: 0 0 25px rgba(4, 30, 82, 0.5);
+}
+
+input[type="number"]:focus {
+    border-color: #752de9;
+    box-shadow: 0 0 25px rgba(4, 30, 82, 0.5);
+}
+
+button {
+    background: #07975b;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 15px;
+    border-radius: 8px;
+    margin: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button:hover {
+    background: #a5ca00;
+    transform: translateY(-2px);
+}
+
+#vec1add, #vec2add {
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    background: #34aadc;
+}
+
+#vec1add:hover, #vec2add:hover {
+    background: #272e31;
+}
+
+h2 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    color: #444;
+}
+
+h4 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    color: #444;
+}
+
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    color: #444;
+}
+
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    height: 2px;
+    background: #dedede;
+}
+
+p {
+    background: #eef4ff;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: rgb(222, 228, 233);
+  padding: 10px;
+}
+
+#i1 {
+  grid-column: 1 / -1; /* span full row */
+}
+
+table {
+    border-collapse: collapse;
+    margin: 10px auto;
+    font-family: "Verdana";
+    font-size: 18px;
+}
+
+table td {
+    min-width: 45px;   /* enough for -100 */
+    height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 4px;
+}
+
+/* Header row (if you add one later) */
+table th {
+    background-color: #f0f0f0;
+    font-weight: 600;
+}
+
+/* Alternate row shading */
+table tr:nth-child(even) {
+    background-color: #bafdec;
+}
+table tr:nth-child(odd) {
+    background-color: #84dfa2;
+}
+
+/* Improve spacing in grid */
+.container > div {
+    padding: 10px;
+    border-radius: 6px;
+    background: #ffffff;
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+
+.matrix-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 6px;
+    border-radius: 6px;
+    background: #fafafa;
+}
+
+.graph-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#graph-canvas {
+    background-color: #f9fbff;
+    border: 2px solid #1be7a3;
+    border-radius: 12px;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.15);
+}
