@@ -26,6 +26,7 @@ DynamicArray<T>::~DynamicArray(){
 
 template <class T>
 DynamicArray<T>::DynamicArray(const DynamicArray& other){
+
     // Copying other variables of the Dynamic Array
     this->size = other.size;
     this->capacity = other.capacity;
@@ -39,17 +40,55 @@ DynamicArray<T>::DynamicArray(const DynamicArray& other){
 
 template <class T>
 DynamicArray<T>& DynamicArray<T>::operator=(const DynamicArray& other){
-    // Copying other variables of the Dynamic Array
+    if (this == &other)
+        return *this;
+
+    T* newData = new T[other.capacity];
+
+    for (size_t i = 0; i < other.size; i++) {
+        newData[i] = other.data[i];
+    }
+
+    delete[] data;
+
+    data = newData;
+    size = other.size;
+    capacity = other.capacity;
+
+    return *this;
+}
+
+template <class T>
+DynamicArray<T>& DynamicArray<T>::operator=(DynamicArray&& other) noexcept{
+        // 1. Self-assignment check
+    if (this == &other)
+        return *this;
+    
+    delete[] data;
+    
+    this->data = other.data;
     this->size = other.size;
     this->capacity = other.capacity;
-    delete[] data;
-    data = new T[capacity];
 
-    // Copying all the elements from other to this constructed variable
-    for(size_t i=0;i<size;i++){
-        this->data[i] = other.data[i];
-    }
+    other.size = 0;
+    other.data = nullptr;
+    other.capacity = 0;
+
     return *this;
+}
+
+template <class T>
+DynamicArray<T>::DynamicArray(DynamicArray&& other) noexcept {
+
+    // 1. Steal the data pointer and metadata
+    data = other.data;
+    size = other.size;
+    capacity = other.capacity;
+
+    // 2. Leave 'other' in a valid empty state
+    other.data = nullptr;
+    other.size = 0;
+    other.capacity = 0;
 }
 
 template <class T>
@@ -214,9 +253,9 @@ void DynamicArray<T>::reserve(size_t new_capacity){
 
 template <class T>
 void DynamicArray<T>::sortbubble(){
-    int* curr;
-    int* next;
-    int temp;
+    T* curr;
+    T* next;
+    T temp;
     for(int i=0;i<size-1;i++){
         for(int j=0;j<size-i-1;j++){
             curr = &data[j];
@@ -228,37 +267,4 @@ void DynamicArray<T>::sortbubble(){
             }
         }
     }
-}
-
-template <class T>
-DynamicArray<T>& DynamicArray<T>::operator=(DynamicArray&& other) noexcept{
-        // 1. Self-assignment check
-    if (this == &other)
-        return *this;
-    
-    delete[] data;
-    
-    this->data = other.data;
-    this->size = other.size;
-    this->capacity = other.capacity;
-
-    other.size = 0;
-    other.data = nullptr;
-    other.capacity = 0;
-
-    return *this;
-}
-
-template <class T>
-DynamicArray<T>::DynamicArray(DynamicArray&& other) noexcept {
-
-    // 1. Steal the data pointer and metadata
-    data = other.data;
-    size = other.size;
-    capacity = other.capacity;
-
-    // 2. Leave 'other' in a valid empty state
-    other.data = nullptr;
-    other.size = 0;
-    other.capacity = 0;
 }
