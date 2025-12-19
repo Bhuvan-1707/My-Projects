@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clustering</title>
+</head>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const radios = document.querySelectorAll(".viewToggle");
+    const divs = document.querySelectorAll(".toggle-div");
+
+    function showSelected(value) {
+        divs.forEach(div => div.style.display = "none");
+        const target = document.getElementById("ND" + value);
+        if (target) target.style.display = "block";
+    }
+
+    radios.forEach(radio => {
+        radio.addEventListener("change", (e) => {
+            showSelected(e.target.value);
+        });
+
+        if (radio.checked) {
+            showSelected(radio.value);
+        }
+    });
+});
+</script>
+
+
+<body>
+    <center>
+    <img src="{{ url_for('static', filename='AmritaLogo.png') }}">
+    <div class="assignment-box">
+    <h1>Assignment: Random Data Generation and Clustering </h1>
+    <p class="subtitle">
+        Dataset Generation & Unsupervised Classification
+    </p>
+
+    <div class="meta">
+        <span><strong>Name:</strong> Bhuvan Rajasekar</span><br>
+        <span><strong>ID:</strong>CB.SC.U4AIE24209</span><br>
+        <span><strong>Course:</strong>Mathematics For Computing</span>
+    </div>
+    </center>
+    <hr>
+    <form method="post" action="/">
+        <div style="text-align: center;">
+            <div id="RContain">
+                <input type="radio" name="dataset" class="viewToggle" value="uniform"
+                {% if selecteddata == 'uniform' %}checked{% endif %}>
+                Random - Uniform
+                <input type="radio" name="dataset" class="viewToggle" value="normal"
+                {% if selecteddata == 'normal' %}checked{% endif %}>
+                Random - Normal <br><br>
+            </div>
+            <div id="NDuniform" class="toggle-div" style="display: none;text-align: center">
+                <input type="number" name="NClusterUniform" placeholder="No.of Clusters in Data"> <input type="number" name="NDPointsUniform" placeholder="No.of Points Per Cluster"> <br> 
+                <input type="number" name="ClusterSpreadUniform" placeholder="Cluster Spread in Raw units"><input type="number" name="ClustervarianceUniform" placeholder="Cluster Variance">
+                <br> <label>Uniform</label>
+            </div>
+            <div id="NDnormal" class="toggle-div" style="display: none; text-align: center">
+                <input type="number" name="NClusterNormal" placeholder="No.of Clusters in Data"> <input type="number" name="NDPointsNormal" placeholder="No.of Points Per Cluster"> <br>
+                <input type="number" name="ClusterSpreadNormal" placeholder="Cluster Spread in Raw units"><input type="number" name="ClustervarianceNormal" placeholder="Cluster Variance">
+                <br> <label>Normal</label>
+            </div>
+            <button type="submit" name="action" value="generate">
+                Generate
+            </button>
+            <button type="submit" name="action" value="classify">
+                Classify
+            </button>
+        </div>
+    </form>
+    <div>
+        {{ plot_html|safe }}
+    </div>
+    {% if n %}
+        <p style="text-align:center;">Best N Centroids: {{ n }}</p>
+    {% endif %}
+    {% if score %}
+        <p style="text-align:center;">Least JScore: {{ score }}</p> 
+    {% endif %}
+    {% if besteff %}
+        <p style="text-align:center;">No.of Clusters: {{ besteff }}</p> 
+    {% endif %}
+</body>
+</html>
