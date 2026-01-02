@@ -1,0 +1,144 @@
+body {
+    background: #f2f7ff;
+}
+
+form {
+    background: white;
+    width: 1000px;
+    margin: 40px auto;
+    padding: 25px 40px;
+    border-radius: 15px;
+    box-shadow: 20px 20px 40px rgba(0,0,0,1);
+}
+
+label {
+    font-size: 14px;
+    font-weight: 200;
+    color: #0f365a;
+}
+
+input[type="text"] {
+    border: 2px solid #1be7a3;
+    border-radius: 6px;
+    padding: 6px;
+    margin-left: 30px;
+    margin-right: 50px;
+    font-size: 16px;
+    width: 70px;
+    text-align: center;
+    outline: none;
+    transition: 0.5s;
+}
+
+input[type="text"]:focus {
+    border-color: #752de9;
+    box-shadow: 0 0 25px rgba(4, 30, 82, 0.5);
+}
+
+button {
+    background: #07975b;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 15px;
+    border-radius: 8px;
+    margin: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button:hover {
+    background: #a5ca00;
+    transform: translateY(-2px);
+}
+
+#vec1add, #vec2add {
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    background: #34aadc;
+}
+
+#vec1add:hover, #vec2add:hover {
+    background: #272e31;
+}
+
+h2 {
+    text-align: center;
+    color: #444;
+}
+
+h1 {
+    text-align: center;
+    color: #444;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    height: 2px;
+    background: #dedede;
+}
+
+p {
+    background: #eef4ff;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.tabs input[type="radio"] {
+  display: none;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.dataset-types {
+  display: flex;
+  gap: 250px;
+  margin-bottom: 10px;
+}
+
+#ellipse:checked ~ #ellipsecontent{
+  display: block;  
+}
+#rectangle:checked ~ #rectanglecontent {
+  display: block;
+}
+#line:checked ~ #linecontent {
+  display: block;
+}
+
+#ellipse:checked ~ .dataset-types label[for="ellipse"] {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+#rectangle:checked ~ .dataset-types label[for="rectangle"] {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+#line:checked ~ .dataset-types label[for="line"] {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.dataset-types label {
+  padding: 10px 20px;
+  background: #f1f1f1;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+input::placeholder {
+  font-size: 16px;
+}

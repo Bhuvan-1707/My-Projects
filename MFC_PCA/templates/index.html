@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssstyle.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCA</title>
+</head>
+<body>
+    <form method="POST" action="{{url_for('homepage')}}">
+        <div id="Generating Dataset">
+            <h2>Dataset Generation</h2>
+            <div class="tabs">
+                <input type="radio" id="ellipse" name="tab-group" value="ellipse">
+                <input type="radio" id="rectangle" name="tab-group" value="rectangle">
+                <input type="radio" id="line" name="tab-group" value="line">
+                <div class="dataset-types">
+                    <label for="ellipse">Elliptical Data</label>
+                    <label for="rectangle">Rectangular Data</label>
+                    <label for="line">Linear Data</label>
+                </div>
+
+                <div class="tab-content" id="ellipsecontent">
+                    <center>
+                    <label>No.of Datapoints: </label><input type="text" placeholder="N" name="NData1">
+                    <label>Mean Of Focii of Ellipse: </label><input type="text" placeholder="x&#772,y&#772" name="MeanFocii">
+                    <label>Spread of Ellipse: </label><input type="text" placeholder="&sigma;&#8339;,&sigma;&#x1D67;" name="Spread"><br><br>
+                    <label>Tilt of the Ellipse: </label><input type="text" placeholder="&theta;&deg;" name="Tilt1">
+                    </center>
+                </div>
+                <div class="tab-content" id="rectanglecontent">
+                    <center>
+                    <label>No.of Datapoints: </label><input type="text" placeholder="N" name="NData2">
+                    <label>Bottom Left Vertice: </label><input type="text" placeholder="x,y" name="startV">
+                    <label>Length and Breadth: </label><input type="text" placeholder="l,b" name="lb"><br><br>
+                    <label>Tilt of the Rectangle: </label><input type="text" placeholder="&theta;&deg;" name="Tilt2">
+                    </center>
+                </div>
+                <div class="tab-content" id="linecontent">
+                    <center>
+                    <label>No.of Datapoints: </label><input type="text" placeholder="N" name="NData3">
+                    <label>Slope: </label><input type="text" placeholder="m" name="slope">
+                    <label>y-intercept: </label><input type="text" placeholder="c" name="intercept">
+                    </center>
+                </div>
+            </div>
+            <center><button type="Submit" name="action" value="generate">Generate</button></center>
+        </div>
+
+        <div>
+            <h2>Workspace:</h2>
+            <div>
+                {{ results|safe }}
+            </div>
+        </div>
+    </form>
+    <form method="POST" action="{{url_for('homepage')}}"">
+        <center><button type="Submit" name="action" value="animate">Animate</button></center>
+    </form>
+</body>
+</html>
